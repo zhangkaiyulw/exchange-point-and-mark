@@ -1,12 +1,10 @@
-import { commands, window, Selection, ExtensionContext } from 'vscode';
+import { commands, Selection, ExtensionContext, TextEditor } from 'vscode';
 
 export function activate(context: ExtensionContext) {
 
   let disposable = commands.registerTextEditorCommand(
-    'extension.exchangePointAndMark',
-    () => {
-      const editor = window.activeTextEditor;
-      if (!editor) return;
+    'exchangePointAndMark',
+    (editor: TextEditor) => {
       editor.selections = editor.selections.map((sel) => {
         return new Selection(sel.active, sel.anchor);
       });
